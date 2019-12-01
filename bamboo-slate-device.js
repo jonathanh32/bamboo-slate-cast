@@ -26,7 +26,7 @@ export class BambooSlateDevice {
         this.onDraw = Function.prototype;
     }
 
-    select_device() {
+    selectDevice() {
         var bamboo = this;
 
         return navigator.bluetooth.requestDevice({
@@ -99,7 +99,7 @@ export class BambooSlateDevice {
             // Connected
             bamboo.connected = true;
             bamboo.onConnected();
-            bamboo.start_live();
+            bamboo.startLive();
 
         }).catch(function (err) {
 
@@ -149,15 +149,15 @@ export class BambooSlateDevice {
         // bambooSlate.exec(0xc1) // is data available?
     }
 
-    start_live() {
+    startLive() {
         var self = this;
 
-        return this.check_connection().then(() => {
+        return this.checkConnection().then(() => {
             self.exec(0xb1);
         });
     }
 
-    check_connection() {
+    checkConnection() {
         return this.exec(0xe6, [0xF5, 0x4B, 0x32, 0x92, 0xC, 0x88]);
     }
 

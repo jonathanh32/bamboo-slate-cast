@@ -26,7 +26,7 @@ class BambooSlate {
 
         this.canvas.addEventListener('dblclick', event => {
             if(!self.connected) {
-                self.bamboo.select_device();
+                self.bamboo.selectDevice();
             } else {
                 if(confirm("Are you sure you want to clear the canvas?")) {
                     self.points = [];
