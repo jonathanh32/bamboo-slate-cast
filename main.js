@@ -8,23 +8,6 @@ const WACOM_OFFLINE_SERVICE_UUID = "ffee0001-bbaa-9988-7766-554433221100";
 const WACOM_OFFLINE_CHRC_PEN_DATA_UUID = "ffee0003-bbaa-9988-7766-554433221100";
 const CHUNKSIZE = 16;
 
-function ab2str(buf) {
-    return String.fromCharCode.apply(null, new Uint8Array(buf));
-}
-
-function str2ab(str) {
-    var buf = new ArrayBuffer(str.length);
-    var bufView = new Uint8Array(buf);
-    for (var i = 0, strLen = str.length; i < strLen; i++) {
-        bufView[i] = str.charCodeAt(i);
-    }
-    return buf;
-}
-
-function buf2hex(buffer) { // buffer is an ArrayBuffer
-    return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
-}
-
 class BambooSlate {
 
     constructor(canvas_id) {
@@ -113,7 +96,6 @@ class BambooSlate {
             bamboo.rx = characteristic;
             bamboo.rx.addEventListener('characteristicvaluechanged', function (event) {
                 var value = event.target.value.buffer;
-                console.log("Received " + buf2hex(value));
             });
             return bamboo.rx.startNotifications();
 
@@ -161,7 +143,6 @@ class BambooSlate {
         
         // Create packet
         var packet = new Uint8Array([opcode, args.length].concat(args));
-        console.log("Sending " + buf2hex(packet.buffer));
         
         // Create promise for response and add event listener
         var promise = new Promise(function(resolve, reject) {
@@ -218,12 +199,10 @@ class BambooSlate {
 
     onConnected() {
         this.connected = true;
-        console.log('Connected.');
         this.draw();
     }
 
     onDisconnected() {
-        console.log('Device is disconnected. Reconnecting...');
         this.connect();
     }
 
@@ -233,7 +212,6 @@ class BambooSlate {
 
     onPenData(event) {
         var buffer = event.target.value.buffer;
-        // console.log("Pen " + buf2hex(buffer));
         var dv = new DataView(buffer, 0);
 
         if(dv.getUint8(0) == 0xa1) {
