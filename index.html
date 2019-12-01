@@ -5,11 +5,22 @@
     <title>Bamboo Screen</title>
     <style>
       html, body { overflow: hidden; margin: 0; padding: 0; width: 100%; height: 100%; display: grid; background-color: #ccc; background: radial-gradient(circle, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 100%); }
-      canvas { margin: auto; background-color: #fff; border: solid 1px #ccc; }
+      #container { position: relative; margin: auto; background-color: #fff; border: solid 1px #ccc; overflow: hidden; }
+      #intro { position: absolute !important; padding: 50px; font-family: 'Courier New', Courier, monospace; position: relative; }
+      #connect { padding: 10px; font-family: 'Courier New', Courier, monospace; background-color: #000; border: 0; color: #fff; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+      #canvas { height: 100%; width: 100%; }
     </style>
   </head>
   <body>
-    <canvas id="canvas" width="1200" height="800"></canvas>
+    <div id="container">
+      <div id="intro">
+        <h1>Bamboo Slate Cast</h1>
+        <p>Draw on your Bamboo Slate, see the result in your browser. Double-click at any time to clear the canvas.</p>
+        <p>Source code and issue tracker on <a href="https://github.com/jonathanh32/bamboo-screen">GitHub</a>. Reference code from <a href="https://github.com/tuhiproject/tuhi">Tuhi</a>. Your browser must support the Web Bluetooth API.</p>
+        <button id="connect">Connect to your Bamboo Slate</button>
+      </div>
+      <canvas id="canvas"></canvas>
+    </div>
     <script src="/main.js" type="module" defer></script>
   </body>
 </html>

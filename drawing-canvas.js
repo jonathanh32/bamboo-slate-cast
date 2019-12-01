@@ -5,7 +5,7 @@ export class DrawingCanvas {
         this.ctx = this.canvas.getContext("2d");
         this.points = [];
         this.lastPoint = [0,0,0,0];
-        this.placeholderText = null;
+        this.placeholderText = "";
     }
 
     /**
