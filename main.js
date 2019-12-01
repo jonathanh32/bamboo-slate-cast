@@ -30,8 +30,8 @@ function updateScale(){
     var maxHeight = window.innerHeight - 100;
     var maxWidth = window.innerWidth - 100;
     drawingCanvas.resize(maxHeight, maxWidth);
-};
+}
 
 updateScale();
 
-window.onresize = updateScale();
+window.onresize = updateScale;
