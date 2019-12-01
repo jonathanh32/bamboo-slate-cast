@@ -17,12 +17,8 @@ bamboo.onConnected = function(){
 };
 
 canvasEl.addEventListener('dblclick', event => {
-    if(!bamboo.connected) {
-        
-    } else {
-        if(confirm("Are you sure you want to clear the canvas?")) {
-            drawingCanvas.clear();
-        }
+    if(confirm("Are you sure you want to clear the canvas?")) {
+        drawingCanvas.clear();
     }
 });
 
